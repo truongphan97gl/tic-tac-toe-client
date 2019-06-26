@@ -1,1 +1,21 @@
 @import '~bootstrap/scss/bootstrap';
+
+$red: #ff0000;
+$yellow: #ffff00;
+.box {
+  align-items: center;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-top: 2px solid;
+  color: $red;
+  display: flex;
+  font-size: 20vw;
+  height: 25vw;
+  justify-content: center;
+  width: 25vw;
+
+  &:hover {
+    background-color: $yellow;
+  }
+}
