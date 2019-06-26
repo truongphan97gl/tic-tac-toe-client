@@ -34,9 +34,30 @@
              <div id="box8" data-id="8" class="col-md-4 box"></div>
            </div>
        </div>
-
-     </div>
-
       </div>
+       <!-- end gameBoard -->
+      <h3 id="message"></h3>
+      <h3 id="alert"></h3>
+    </div>
+          <form id="sign-up">
+            <input name="credentials[email]" type="text" placeholder="email" >
+            <input name="credentials[password]" type="password" placeholder="password">
+            <input name="credentials[password_confirmation]" type="password" placeholder="password">
+            <button type='submit'> Sign Up </button>
+          </form>
+          <form id="sign-in">
+            <input name="credentials[email]" type="text" placeholder="email">
+            <input name="credentials[password]" type="password" placeholder="password">
+            <button type='submit'> Sign IN </button>
+          </form>
+          <form id="change-password">
+            <input type="password" name="passwords[old]" placeholder="Old Password">
+            <input type="password" name="passwords[new]" placeholder="New Password">
+            <button type='submit'> Change </button>
+          </form>
+
+          <form id="create-game">
+            <button>CreateNewGame</button>
+          </form>
     </body>
 </html>
