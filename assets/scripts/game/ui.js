@@ -1,7 +1,7 @@
 'use strict'
 
-const drawMove = event => {
-
+const drawMove = (target, xOry) => {
+  target.text(xOry)
 }
 
 module.exports = {

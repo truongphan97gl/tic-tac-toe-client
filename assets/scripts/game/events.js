@@ -1,5 +1,6 @@
 'use strict'
 const store = require('../config.js')
+const ui = require('./ui')
 const onMove = event => {
   const target = $(event.target)
   console.log(target.text())
@@ -7,10 +8,10 @@ const onMove = event => {
     console.log('Unavaible Move')
   } else {
     if (store['currentPlayer'] === 'X') {
-      $(event.target).text('X')
+      ui.drawMove(target, 'X')
       store['currentPlayer'] = 'O'
     } else {
-      $(event.target).text('O')
+      ui.drawMove(target, 'O')
       store['currentPlayer'] = 'X'
     }
   }
