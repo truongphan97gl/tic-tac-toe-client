@@ -111,6 +111,9 @@ const getGameSuccessful = responseData => {
   $('form').trigger('reset')
 }
 
+const updateSuccess = responseData => {
+  console.log(responseData)
+}
 module.exports = {
   drawMove,
   alertInvalid,
@@ -126,5 +129,6 @@ module.exports = {
   createFailure,
   getGameFailure,
   getGameSuccessful,
-  alertGameOver
+  alertGameOver,
+  updateSuccess
 }

@@ -27,7 +27,7 @@ const winner = () => {
   if (condition) {
     $('#message').text(store.previousPlayer + ' is the winner ')
     store.disableClick = true
-    store.Over = true
+    store.Over = 1
     return true
   }
 
@@ -59,8 +59,6 @@ const onMove = event => {
     } // end else statement
   } // -- End of if statement
 
-  // everymove will update the game to the API
-  api.updateGame(id, store.previousPlayer)
   // check if full
   const full = store.play.some(place => {
     return place === ''
@@ -70,6 +68,9 @@ const onMove = event => {
   if (!winner() && !full) {
     $('#message').text('Draw')
   }
+  // everymove will update the game to the API
+  api.updateGame(id, store.previousPlayer, store.over)
+    .then(ui.updateSuccess)
 }
 
 const onCreateGame = event => {
@@ -128,10 +129,6 @@ const onChangePassword = event => {
 }
 // -----------sketch goals----------
 
-const onBotPlay = event => {
-  const randomNumber = Math.floor((Math.random() * 8) + 0)
-  store.disableClick = true
-}
 module.exports = {
   onMove,
   onCreateGame,
@@ -139,6 +136,5 @@ module.exports = {
   onGetGame,
   onSignUp,
   onSignIn,
-  onSignOut,
-  onBotPlay
+  onSignOut
 }

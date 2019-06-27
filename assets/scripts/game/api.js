@@ -41,6 +41,7 @@ const createGame = () => {
 }
 
 const updateGame = (id, player) => {
+  let over1 = Number(store.Over)
   return $.ajax({
     url: config.apiUrl + '/games/' + store.game.id,
     method: 'PATCH',
@@ -53,7 +54,7 @@ const updateGame = (id, player) => {
           index: id,
           value: player
         },
-        over: store.Over
+        over: over1
       }
     }
   })
