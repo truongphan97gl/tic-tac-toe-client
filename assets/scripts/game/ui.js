@@ -80,8 +80,10 @@ const createSuccessful = responseData => {
   console.log(responseData)
   $('#gameBoard').show()
   store.game = responseData.game
+  $('#game-id').text('Your game ID is :' + responseData.game.id)
   emptyBoard()
   $('#message').text('You are created successfully')
+  $('form').trigger('reset')
 }
 
 const createFailure = responseData => {

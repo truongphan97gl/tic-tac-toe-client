@@ -126,7 +126,12 @@ const onChangePassword = event => {
     .then(ui.changeSuccessful)
     .catch(ui.changeFailure)
 }
+// -----------sketch goals----------
 
+const onBotPlay = event => {
+  const randomNumber = Math.floor((Math.random() * 8) + 0)
+  store.disableClick = true
+}
 module.exports = {
   onMove,
   onCreateGame,
@@ -134,5 +139,6 @@ module.exports = {
   onGetGame,
   onSignUp,
   onSignIn,
-  onSignOut
+  onSignOut,
+  onBotPlay
 }

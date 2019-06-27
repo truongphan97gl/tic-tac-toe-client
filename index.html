@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>TIC-TAC-TOE </title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -12,7 +12,7 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <h1>TIC-TAC-TOE</h1>
       <div id="user-board" class="col-md-4"></div>
       <div id="game-board" class="col-md-8">
 
@@ -57,7 +57,7 @@
           </form>
 
           <form id="get-game" class="hide">
-            <input type="number" name="games[id]" placeholder="ID">
+            <input type="number" name="games[id]" placeholder="ID" min="0">
             <button>Get Game</button>
           </form>
           <form id="sign-out" class="hide">
@@ -66,6 +66,7 @@
           <form id="create-game" class="hide">
             <button>CreateNewGame</button>
           </form>
+          <div id="game-id"></div>
           <div id="display-game"></div>
     </body>
 </html>

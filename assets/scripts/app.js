@@ -15,4 +15,5 @@ $(() => {
   $('#change-password').on('submit', userEvents.onChangePassword)
   $('#get-game').on('submit', userEvents.onGetGame)
   $('#sign-out').on('submit', userEvents.onSignOut)
+  $('#bot-play').on('submit', userEvents.onBotPlay)
 })
