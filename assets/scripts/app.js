@@ -16,4 +16,5 @@ $(() => {
   $('#get-game').on('submit', userEvents.onGetGame)
   $('#sign-out').on('submit', userEvents.onSignOut)
   $('#bot-play').on('submit', userEvents.onBotPlay)
+  $('#user-game').on('submit', userEvents.onUserGame)
 })

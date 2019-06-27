@@ -29,14 +29,17 @@ const signUpFailure = () => {
 const signInSuccessful = responseData => {
   $('#message').text('You are signed in successfully')
   store.user = responseData.user
-  // show
+
+  $('#user-game').removeClass('hide')
   $('#change-password').removeClass('hide')
   $('#create-game').removeClass('hide')
   $('#get-game').removeClass('hide')
+  $('#sign-out').removeClass('hide')
+  $('#game-board').removeClass('hide')
+  $('#game-id').removeClass('hide')
   // Hide
   $('#sign-in').addClass('hide')
   $('#sign-up').addClass('hide')
-  $('#sign-out').addClass('hide')
   $('form').trigger('reset')
 }
 
@@ -48,13 +51,19 @@ const signInFailure = response => {
 const signOutSuccessful = () => {
   $('#message').text('You signed out successfully ')
   // hide
+  $('#game-board').addClass('hide')
   $('#change-password').addClass('hide')
   $('#create-game').addClass('hide')
   $('#get-game').addClass('hide')
-
+  $('#sign-out').addClass('hide')
+  $('#game-id').addClass('hide')
+  $('#sign-out').addClass('hide')
+  $('#user-game').addClass('hide')
   // show
   $('#sign-in').removeClass('hide')
   $('#sign-up').removeClass('hide')
+  emptyBoard()
+  store.disableClick = false
   $('form').trigger('reset')
 }
 const signOutFailure = () => {
@@ -114,6 +123,11 @@ const getGameSuccessful = responseData => {
 const updateSuccess = responseData => {
   console.log(responseData)
 }
+
+const getAllGameSuccessful = data => {
+  console.log(data)
+  $('#message').text('Your total game is ' + data.games.length)
+}
 module.exports = {
   drawMove,
   alertInvalid,
@@ -130,5 +144,6 @@ module.exports = {
   getGameFailure,
   getGameSuccessful,
   alertGameOver,
-  updateSuccess
+  updateSuccess,
+  getAllGameSuccessful
 }

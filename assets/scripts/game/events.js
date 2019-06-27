@@ -99,6 +99,11 @@ const onGetGame = event => {
     .catch(ui.getGameFailure)
 }
 
+const onUserGame = event => {
+  event.preventDefault()
+  api.getAllGame()
+    .then(ui.getAllGameSuccessful)
+}
 // -------------User PART--------------------
 const onSignUp = event => {
   event.preventDefault()
@@ -123,7 +128,7 @@ const onSignOut = event => {
 
   api.signOut()
     .then(ui.signOutSuccessful)
-    .cartch(ui.signOutFailure)
+    .catch(ui.signOutFailure)
 }
 
 const onChangePassword = event => {
@@ -142,5 +147,6 @@ module.exports = {
   onGetGame,
   onSignUp,
   onSignIn,
-  onSignOut
+  onSignOut,
+  onUserGame
 }
