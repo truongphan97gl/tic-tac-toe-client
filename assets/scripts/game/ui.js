@@ -55,6 +55,7 @@ const signOutSuccessful = () => {
   // show
   $('#sign-in').removeClass('hide')
   $('#sign-up').removeClass('hide')
+  $('form').trigger('reset')
 }
 const signOutFailure = () => {
   $('#message').text('You failed to signed out ')
