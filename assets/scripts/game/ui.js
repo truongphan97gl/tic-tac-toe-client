@@ -78,10 +78,10 @@ const emptyBoard = () => {
 
 const createSuccessful = responseData => {
   console.log(responseData)
-  $('#message').text('You are created successfully')
   $('#gameBoard').show()
   store.game = responseData.game
   emptyBoard()
+  $('#message').text('You are created successfully')
 }
 
 const createFailure = responseData => {
