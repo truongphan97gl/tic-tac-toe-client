@@ -10,10 +10,8 @@ const isWin = (first, second, third) => {
   const secondCheck = $('#box' + second).text()
   const thirdCheck = $('#box' + third).text()
 
-  if (firstCheck === 'X' && secondCheck === 'X' && thirdCheck === 'X') {
-    return true
-  }
-  if (firstCheck === 'O' && secondCheck === 'O' && thirdCheck === 'O') {
+  if ((firstCheck === 'X' && secondCheck === 'X' && thirdCheck === 'X') ||
+   (firstCheck === 'O' && secondCheck === 'O' && thirdCheck === 'O')) {
     return true
   }
   return false
@@ -32,6 +30,7 @@ const winner = () => {
     store.Over = true
     return true
   }
+
   return false
 }
 
@@ -79,7 +78,6 @@ const onCreateGame = event => {
     .then(ui.createSuccessful)
     .catch(ui.createFailure)
 }
-
 
 const onGetGame = event => {
   event.preventDefault()

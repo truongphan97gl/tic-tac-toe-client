@@ -12,12 +12,6 @@ const alertInvalid = () => {
   $('#alert').css('color', 'red')
 }
 
-const emptyBoard = () => {
-  $('.box').text('')
-  $('#message').text('')
-  $('#alert').text('')
-}
-
 const signUpSuccessful = responseData => {
   $('#message').text('You are signed up successfully')
 }
@@ -65,6 +59,12 @@ const changeFailure = response => {
   $('#message').text('You failed to change password ')
 }
 
+const emptyBoard = () => {
+  $('.box').text('')
+  $('#message').text('')
+  $('#alert').text('')
+}
+
 const createSuccessful = responseData => {
   console.log(responseData)
   $('#message').text('You are created successfully')
@@ -95,6 +95,7 @@ const getGameSuccessful = responseData => {
   `
   $('#display-game').html(htmlContent)
 }
+
 module.exports = {
   drawMove,
   alertInvalid,
@@ -109,5 +110,6 @@ module.exports = {
   createSuccessful,
   createFailure,
   getGameFailure,
-  getGameSuccessful
+  getGameSuccessful,
+  updateSuccessful
 }
