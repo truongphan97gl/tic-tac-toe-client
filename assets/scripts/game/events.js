@@ -69,7 +69,7 @@ const onMove = event => {
     $('#message').text('Draw')
   }
   // everymove will update the game to the API
-  let over = 0
+  let over = false
   if (store.Over === true) {
     over = 4
   }
