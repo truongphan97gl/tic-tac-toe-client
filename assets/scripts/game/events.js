@@ -59,7 +59,7 @@ const onMove = event => {
 
   // everymove will update the game to the API
   api.updateGame(id, store.previousPlayer)
-    // check if full
+  // check if full
   const full = store.play.some(place => {
     return place === ''
   })
@@ -68,6 +68,7 @@ const onMove = event => {
   if (!winner() && !full) {
     $('#message').text('Draw')
   }
+}
 
 const onCreateGame = event => {
   event.preventDefault()
@@ -116,6 +117,7 @@ const onSignOut = event => {
     .then(ui.signOutSuccessful)
     .cartch(ui.signOutFailure)
 }
+
 const onChangePassword = event => {
   event.preventDefault()
   const formData = getFormFields(event.target)
