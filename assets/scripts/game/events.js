@@ -5,10 +5,11 @@ const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api')
 store.play = ['', '', '', '', '', '', '', '', '']
 
-const checkWinner = (first, second, third) => {
+const isWin = (first, second, third) => {
   const firstCheck = $('#box' + first).text()
   const secondCheck = $('#box' + second).text()
   const thirdCheck = $('#box' + third).text()
+
   if (firstCheck === 'X' && secondCheck === 'X' && thirdCheck === 'X') {
     return true
   }
@@ -18,30 +19,41 @@ const checkWinner = (first, second, third) => {
   return false
 }
 
-const isFull = place => {
-  return place === ''
-}
+// check winner
 const winner = () => {
   // Check in column
-  if (checkWinner(1, 4, 7) || checkWinner(0, 3, 6) || checkWinner(2, 5, 8)) {
+
+  const condition = isWin(1, 4, 7) || isWin(0, 3, 6) || isWin(2, 5, 8) ||
+  isWin(0, 1, 2) || isWin(3, 4, 5) || isWin(6, 7, 8) || isWin(0, 4, 8) || isWin(2, 4, 6)
+
+  if (condition) {
     $('#message').text(store.previousPlayer + ' is the winner ')
     store.disableClick = true
-    return true
-  }
-  // check in row
-  if (checkWinner(0, 1, 2) || checkWinner(3, 4, 5) || checkWinner(6, 7, 8)) {
-    $('#message').text(store.previousPlayer + ' is the winner ')
-    store.disableClick = true
-    return true
-  }
-  // check in diagno
-  if (checkWinner(0, 4, 8) || checkWinner(2, 4, 6)) {
-    $('#message').text(store.previousPlayer + ' is the winner ')
-    store.disableClick = true
+    store.Over = true
     return true
   }
   return false
 }
+// if (checkWinner(1, 4, 7) || checkWinner(0, 3, 6) || checkWinner(2, 5, 8)) {
+//   $('#message').text(store.previousPlayer + ' is the winner ')
+//   store.disableClick = true
+//   store.Over = true
+//   return true
+// }
+// // check in row
+// if (checkWinner(0, 1, 2) || checkWinner(3, 4, 5) || checkWinner(6, 7, 8)) {
+//   $('#message').text(store.previousPlayer + ' is the winner ')
+//   store.disableClick = true
+//   store.Over = true
+//   return true
+// }
+// // check in diagno
+// if (checkWinner(0, 4, 8) || checkWinner(2, 4, 6)) {
+//   $('#message').text(store.previousPlayer + ' is the winner ')
+//   store.disableClick = true
+//   store.Over = true
+//   return true
+// }
 
 const onMove = event => {
   const target = $(event.target)
@@ -53,13 +65,6 @@ const onMove = event => {
       ui.alertInvalid()
       console.log('Unavaible Move')
     } else {
-      if (typeof store['currentPlayer'] === 'undefined') {
-        ui.drawMove(target, 'X', 'O')
-        store['previousPlayer'] = 'X'
-        store['currentPlayer'] = 'O'
-        store.play[id] = store['X']
-        // if the current player is X
-      } else
       if (store['currentPlayer'] === 'X') {
         ui.drawMove(target, 'X', 'O')
         store['previousPlayer'] = 'X'
@@ -73,11 +78,21 @@ const onMove = event => {
       store.play[id] = store['previousPlayer']
     } // end else statement
   }
-  const full = store.play.some(isFull)
+  console.log(`check ${id} and ${store['previousPlayer']}`)
+  console.log(id)
+  console.log(store['previousPlayer'])
+  api.updateGame(id, store.previousPlayer)
+    .then(ui.updateSuccessful)
+    .catch(console.log)
+    // check if full
+  const full = store.play.some(place => {
+    return place === ''
+  })
+  // check winner
   if (!winner()) {
     if (!full) {
       $('#message').text('Draw')
-      console.log('The game board is full')
+      store.Over = true
     }
   }
   // console.log('Select box ID : ', $('#box' + id).text())
@@ -119,10 +134,22 @@ const onChangePassword = event => {
     .then(ui.changeSuccessful)
     .catch(ui.changeFailure)
 }
+
+const onGetGame = event => {
+  event.preventDefault()
+  const formData = getFormFields(event.target)
+  const id = formData.games.id
+  console.log('id is', id)
+  api.getGame(id)
+    .then(ui.getGameSuccessful)
+    .catch(ui.getGameFailure)
+}
+
 module.exports = {
   onMove,
   onCreateGame,
   onSignUp,
   onSignIn,
-  onChangePassword
+  onChangePassword,
+  onGetGame
 }

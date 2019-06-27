@@ -13,16 +13,16 @@ const alertInvalid = () => {
 }
 
 const emptyBoard = () => {
-  for (let i = 0; i < 9; i++) {
-    $('#box' + i).text('')
-  }
+  $('.box').text('')
+  // for (let i = 0; i < 9; i++) {
+  //   $('#box' + i).text('')
+  // }
   $('#message').text('')
   $('#alert').text('')
 }
 
-const signUpSuccessful = () => {
+const signUpSuccessful = responseData => {
   $('#message').text('You are signed up successfully')
-  $('#gameBoard').show()
 }
 
 const signUpFailure = () => {
@@ -32,7 +32,6 @@ const signUpFailure = () => {
 const signInSuccessful = responseData => {
   $('#message').text('You are signed in successfully')
   store.user = responseData.user
-  $('#gameBoard').show()
 }
 
 const signInFailure = response => {
@@ -50,10 +49,22 @@ const changeFailure = response => {
 const createSuccessful = responseData => {
   console.log(responseData)
   $('#message').text('You are created successfully')
+  $('#gameBoard').show()
+  store.game = responseData.game
 }
 
 const createFailure = responseData => {
   $('#message').text('You failed to create ')
+}
+const updateSuccessful = responseData => {
+  console.log(responseData)
+}
+
+const getGameFailure = responseData => {
+  $('#message').text('You failed to show ')
+}
+const getGameSuccessful = responseData => {
+  $('#message').text('You show successfully ')
 }
 module.exports = {
   drawMove,
@@ -66,5 +77,8 @@ module.exports = {
   changeSuccessful,
   changeFailure,
   createSuccessful,
-  createFailure
+  createFailure,
+  updateSuccessful,
+  getGameFailure,
+  getGameSuccessful
 }
