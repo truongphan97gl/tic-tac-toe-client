@@ -2,6 +2,8 @@
 
 $red: #ff0000;
 $yellow: #ffff00;
+$lightblue: #add8e6;
+$lightgrey: lightgray;
 
 .box {
   align-items: center;
@@ -27,7 +29,7 @@ $yellow: #ffff00;
 
 @media only screen and (max-width: 600px) {
   body {
-    background-color: lightblue;
+    background-color: $lightblue;
   }
 
   .box {
@@ -39,7 +41,7 @@ $yellow: #ffff00;
 
 @media only screen and (max-width: 450px) {
   body {
-    background-color: lightgray;
+    background-color: $lightgrey;
   }
 
   .box {
