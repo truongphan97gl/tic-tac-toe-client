@@ -27,7 +27,7 @@ const winner = () => {
   if (condition) {
     $('#message').text(store.previousPlayer + ' is the winner ')
     store.disableClick = true
-    store.Over = 1
+    store.Over = true
     return true
   }
 
@@ -69,7 +69,12 @@ const onMove = event => {
     $('#message').text('Draw')
   }
   // everymove will update the game to the API
-  api.updateGame(id, store.previousPlayer, store.over)
+  let over = 0
+  if (store.Over === true) {
+    over = 4
+  }
+
+  api.updateGame(id, store.previousPlayer, over)
     .then(ui.updateSuccess)
 }
 
@@ -78,6 +83,7 @@ const onCreateGame = event => {
 
   store.play = ['', '', '', '', '', '', '', '', '']
   store.disableClick = false
+  store.Over = false
   api.createGame()
     .then(ui.createSuccessful)
     .catch(ui.createFailure)
