@@ -16,7 +16,7 @@
       <div id="user-board" class="col-md-4"></div>
       <div id="game-board" class="col-md-8">
 
-        <div id="gameBoard" class="playable" >
+        <div id="gameBoard" class="playable hide" >
           <div class="container">
            <div class="row">
              <div id="box0" data-id="0" class="col-md-4 box"></div>
@@ -50,18 +50,22 @@
             <input name="credentials[password]" type="password" placeholder="password">
             <button type='submit'> Sign IN </button>
           </form>
-          <form id="change-password">
+          <form id="change-password" class="hide">
             <input type="password" name="passwords[old]" placeholder="Old Password">
             <input type="password" name="passwords[new]" placeholder="New Password">
             <button type='submit'> Change </button>
           </form>
 
-          <form id="create-game">
-            <button>CreateNewGame</button>
-          </form>
-          <form id="get-game">
+          <form id="get-game" class="hide">
             <input type="number" name="games[id]" placeholder="ID">
             <button>Get Game</button>
           </form>
+          <form id="sign-out hide">
+            <button>Sign-Out</button>
+          </form>
+          <form id="create-game" class="hide">
+            <button>CreateNewGame</button>
+          </form>
+          <div id="display-game"></div>
     </body>
 </html>

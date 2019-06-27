@@ -34,36 +34,14 @@ const winner = () => {
   }
   return false
 }
-// if (checkWinner(1, 4, 7) || checkWinner(0, 3, 6) || checkWinner(2, 5, 8)) {
-//   $('#message').text(store.previousPlayer + ' is the winner ')
-//   store.disableClick = true
-//   store.Over = true
-//   return true
-// }
-// // check in row
-// if (checkWinner(0, 1, 2) || checkWinner(3, 4, 5) || checkWinner(6, 7, 8)) {
-//   $('#message').text(store.previousPlayer + ' is the winner ')
-//   store.disableClick = true
-//   store.Over = true
-//   return true
-// }
-// // check in diagno
-// if (checkWinner(0, 4, 8) || checkWinner(2, 4, 6)) {
-//   $('#message').text(store.previousPlayer + ' is the winner ')
-//   store.disableClick = true
-//   store.Over = true
-//   return true
-// }
 
 const onMove = event => {
   const target = $(event.target)
   const id = target.data('id')
-  console.log('Current ID is ', id)
   // Logic to check the move is avaiable or not
   if (!store.disableClick) {
     if (target.text() === 'X' || target.text() === 'O') {
       ui.alertInvalid()
-      console.log('Unavaible Move')
     } else {
       if (store['currentPlayer'] === 'X') {
         ui.drawMove(target, 'X', 'O')
@@ -77,27 +55,19 @@ const onMove = event => {
       }
       store.play[id] = store['previousPlayer']
     } // end else statement
-  }
-  console.log(`check ${id} and ${store['previousPlayer']}`)
-  console.log(id)
-  console.log(store['previousPlayer'])
+  } // -- End of if statement
+
+  // everymove will update the game to the API
   api.updateGame(id, store.previousPlayer)
-    .then(ui.updateSuccessful)
-    .catch(console.log)
     // check if full
   const full = store.play.some(place => {
     return place === ''
   })
-  // check winner
-  if (!winner()) {
-    if (!full) {
-      $('#message').text('Draw')
-      store.Over = true
-    }
+
+  // if it is not win and full then message is Draw
+  if (!winner() && !full) {
+    $('#message').text('Draw')
   }
-  // console.log('Select box ID : ', $('#box' + id).text())
-  // console.log('Checking console checkwinner: ', checkWinner(1, 4, 7))
-}
 
 const onCreateGame = event => {
   event.preventDefault()
@@ -107,9 +77,20 @@ const onCreateGame = event => {
   api.createGame()
     .then(ui.createSuccessful)
     .catch(ui.createFailure)
-  ui.emptyBoard()
 }
 
+
+const onGetGame = event => {
+  event.preventDefault()
+  const formData = getFormFields(event.target)
+  const id = formData.games.id
+  console.log('id is', id)
+  api.getGame(id)
+    .then(ui.getGameSuccessful)
+    .catch(ui.getGameFailure)
+}
+
+// -------------User PART--------------------
 const onSignUp = event => {
   event.preventDefault()
   const formData = getFormFields(event.target)
@@ -127,6 +108,14 @@ const onSignIn = event => {
     .then(ui.signInSuccessful)
     .catch(ui.signInFailure)
 }
+
+const onSignOut = event => {
+  event.preventDefault()
+
+  api.signOut()
+    .then(ui.signOutSuccessful)
+    .cartch(ui.signOutFailure)
+}
 const onChangePassword = event => {
   event.preventDefault()
   const formData = getFormFields(event.target)
@@ -135,21 +124,12 @@ const onChangePassword = event => {
     .catch(ui.changeFailure)
 }
 
-const onGetGame = event => {
-  event.preventDefault()
-  const formData = getFormFields(event.target)
-  const id = formData.games.id
-  console.log('id is', id)
-  api.getGame(id)
-    .then(ui.getGameSuccessful)
-    .catch(ui.getGameFailure)
-}
-
 module.exports = {
   onMove,
   onCreateGame,
+  onChangePassword,
+  onGetGame,
   onSignUp,
   onSignIn,
-  onChangePassword,
-  onGetGame
+  onSignOut
 }
