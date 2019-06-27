@@ -1,23 +1,29 @@
 'use strict'
 const store = require('../store')
 
+const alertInvalid = () => {
+  $('#alert').text('You cannot click at that cell !!!!')
+  $('#alert').css('color', 'red')
+}
+
 const drawMove = (target, xOro, currentPlayer) => {
   target.text(xOro)
   $('#message').text(currentPlayer + ' is TURN!')
   $('#alert').text('')
 }
 
-const alertInvalid = () => {
-  $('#alert').text('You cannot click at that cell !!!!')
+const alertGameOver = () => {
+  $('#alert').text('Game is over !!! You cannot click !!!')
   $('#alert').css('color', 'red')
 }
-
 const signUpSuccessful = responseData => {
   $('#message').text('You are signed up successfully')
+  $('form').trigger('reset')
 }
 
 const signUpFailure = () => {
   $('#message').text('You failed to signed up ')
+  $('form').trigger('reset')
 }
 
 const signInSuccessful = responseData => {
@@ -31,10 +37,12 @@ const signInSuccessful = responseData => {
   $('#sign-in').addClass('hide')
   $('#sign-up').addClass('hide')
   $('#sign-out').addClass('hide')
+  $('form').trigger('reset')
 }
 
 const signInFailure = response => {
   $('#message').text('You failed to signed up ')
+  $('form').trigger('reset')
 }
 
 const signOutSuccessful = () => {
@@ -53,10 +61,12 @@ const signOutFailure = () => {
 }
 const changeSuccessful = responseData => {
   $('#message').text('You are changed password successfully')
+  $('form').trigger('reset')
 }
 
 const changeFailure = response => {
   $('#message').text('You failed to change password ')
+  $('form').trigger('reset')
 }
 
 const emptyBoard = () => {
@@ -78,6 +88,7 @@ const createFailure = responseData => {
 }
 const getGameFailure = responseData => {
   $('#message').text('You failed to show ')
+  $('form').trigger('reset')
 }
 const getGameSuccessful = responseData => {
   $('#message').text('You show successfully ')
@@ -94,6 +105,7 @@ const getGameSuccessful = responseData => {
     <p> Player O : ${responseData.game.player_o}
   `
   $('#display-game').html(htmlContent)
+  $('form').trigger('reset')
 }
 
 module.exports = {
@@ -111,5 +123,5 @@ module.exports = {
   createFailure,
   getGameFailure,
   getGameSuccessful,
-  updateSuccessful
+  alertGameOver
 }

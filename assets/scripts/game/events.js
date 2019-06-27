@@ -35,6 +35,9 @@ const winner = () => {
 }
 
 const onMove = event => {
+  if (store.disableClick === true) {
+    ui.alertGameOver()
+  }
   const target = $(event.target)
   const id = target.data('id')
   // Logic to check the move is avaiable or not
@@ -42,15 +45,15 @@ const onMove = event => {
     if (target.text() === 'X' || target.text() === 'O') {
       ui.alertInvalid()
     } else {
-      if (store['currentPlayer'] === 'X') {
-        ui.drawMove(target, 'X', 'O')
-        store['previousPlayer'] = 'X'
-        store['currentPlayer'] = 'O'
-      // if the current player is O
-      } else {
+      if (store['currentPlayer'] === 'O') {
         ui.drawMove(target, 'O', 'X')
         store['previousPlayer'] = 'O'
         store['currentPlayer'] = 'X'
+      } else {
+        ui.drawMove(target, 'X', 'O')
+        store['previousPlayer'] = 'X'
+        store['currentPlayer'] = 'O'
+        // if the current player is O
       }
       store.play[id] = store['previousPlayer']
     } // end else statement
