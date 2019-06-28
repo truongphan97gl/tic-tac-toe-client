@@ -1,23 +1,47 @@
 'use strict'
-const store = require('../config.js')
+const store = require('../store.js')
 const ui = require('./ui')
 const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api')
-store.play = ['', '', '', '', '', '', '', '', '']
-
+store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+store.winner = []
 // function check win
+
+const onPlaybot = event => {
+  event.preventDefault()
+  store.disableClick = true
+  if (store.botMode === true) {
+    store.botMode = false
+  } else {
+    store.botMode = true
+  }
+  ui.playBot()
+}
+
 const isWin = (first, second, third) => {
   const firstCheck = $('#box' + first).text()
   const secondCheck = $('#box' + second).text()
   const thirdCheck = $('#box' + third).text()
-
   if ((firstCheck === 'X' && secondCheck === 'X' && thirdCheck === 'X') ||
    (firstCheck === 'O' && secondCheck === 'O' && thirdCheck === 'O')) {
+    store.winner = [first, second, third]
+    ui.highlight()
     return true
   }
   return false
 }
 
+const isFull = () => {
+  const full = store.play.every(place => {
+    return (typeof place !== 'number')
+  })
+
+  // if it is not win and full then message is Draw
+  if (!winner() && full) {
+    $('#message').text('Draw')
+    store.Over = true
+  }
+}
 // check the possibility wins
 const winner = () => {
   const condition = isWin(1, 4, 7) || isWin(0, 3, 6) || isWin(2, 5, 8) ||
@@ -34,16 +58,11 @@ const winner = () => {
   return false
 }
 
-const onMove = event => {
-  if (store.disableClick === true) {
-    ui.alertGameOver()
-  }
-  const target = $(event.target)
-  const id = target.data('id')
-  // if the game is end or full dont let the user click
+const checkMove = (target, id) => {
   if (!store.disableClick) {
     if (target.text() === 'X' || target.text() === 'O') {
       ui.alertInvalid()
+      checkMove(target, id)
     } else {
       if (store['currentPlayer'] === 'O') {
         ui.drawMove(target, 'O', 'X')
@@ -58,17 +77,8 @@ const onMove = event => {
       store.play[id] = store['previousPlayer']
     } // end else statement
   } // -- End of if statement
-
-  // check if full
-  const full = store.play.some(place => {
-    return place === ''
-  })
-
-  // if it is not win and full then message is Draw
-  if (!winner() && !full) {
-    $('#message').text('Draw')
-  }
   // check if the game is over or not
+  isFull()
   let over = false
   if (store.Over === true) {
     over = 4
@@ -79,10 +89,23 @@ const onMove = event => {
     .then(ui.updateSuccess)
 }
 
+const onMove = event => {
+  if (store.disableClick === true) {
+    ui.alertGameOver()
+  }
+  const target = $(event.target)
+  const id = target.data('id')
+  checkMove(target, id)
+  if (store.Over !== true && store.botMode === true) {
+    aiTurn()
+  }
+  // check if full
+}
+
 const onCreateGame = event => {
   event.preventDefault()
   // reset the storage
-  store.play = ['', '', '', '', '', '', '', '', '']
+  store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   // enable the gameBoard
   store.disableClick = false
   store.Over = false
@@ -105,9 +128,35 @@ const onUserGame = event => {
   api.getAllGame()
     .then(ui.getAllGameSuccessful)
 }
+// AI player
+
+const emptySpot = () => {
+  const available = []
+  for (let i = 0; i < store.play.length; i++) {
+    if (typeof store.play[i] === 'number') {
+      available.push(i)
+    }
+  }
+  return available
+}
+
+const takeRandomSpot = available => {
+  let randomNumber = Math.floor(Math.random() * 8)
+  while (available.indexOf(randomNumber) === -1) {
+    randomNumber = Math.floor(Math.random() * 8)
+  }
+  return randomNumber
+}
+
+const aiTurn = () => {
+  const index = takeRandomSpot(emptySpot())
+  const target = $('#box' + index)
+  checkMove(target, index)
+}
 module.exports = {
   onMove,
   onUserGame,
   onGetGame,
-  onCreateGame
+  onCreateGame,
+  onPlaybot
 }

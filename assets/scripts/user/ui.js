@@ -27,6 +27,7 @@ const signInSuccessful = responseData => {
   $('#get-game').removeClass('hide')
   $('#sign-out').removeClass('hide')
   $('#game-id').removeClass('hide')
+  $('#play-bot').removeClass('hide')
   // Hide
   $('#sign-in').addClass('hide')
   $('#sign-up').addClass('hide')
@@ -50,6 +51,7 @@ const signOutSuccessful = () => {
   $('#game-id').addClass('hide')
   $('#sign-out').addClass('hide')
   $('#user-game').addClass('hide')
+  $('#play-bot').addClass('hide')
   // show some things
   $('#sign-in').removeClass('hide')
   $('#sign-up').removeClass('hide')

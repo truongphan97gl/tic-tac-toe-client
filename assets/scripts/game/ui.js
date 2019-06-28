@@ -2,7 +2,11 @@
 const store = require('../store')
 
 const alertInvalid = () => {
-  $('#alert').text('You cannot click at that cell !!!!')
+  if (store.botMode === true) {
+    $('#alert').text('Please create a new game !!')
+  } else {
+    $('#alert').text('You cannot click at that cell !!!!')
+  }
   $('#alert').css('color', 'red')
 }
 
@@ -12,6 +16,11 @@ const drawMove = (target, xOro, currentPlayer) => {
   $('#alert').text('')
 }
 
+const highlight = (first, second, third) => {
+  for (let i = 0; i < 3; i++) {
+    $('#box' + store.winner[i]).addClass('red-background')
+  }
+}
 const alertGameOver = () => {
   $('#alert').text('Game is over !!! You cannot click !!!')
   $('#alert').css('color', 'red')
@@ -21,6 +30,9 @@ const emptyBoard = () => {
   $('.box').text('')
   $('#message').text('')
   $('#alert').text('')
+  for (let i = 0; i < 3; i++) {
+    $('#box' + store.winner[i]).removeClass('red-background')
+  }
 }
 
 const createSuccessful = responseData => {
@@ -66,6 +78,13 @@ const getAllGameSuccessful = data => {
   console.log(data)
   $('#message').text('Your total game is ' + data.games.length)
 }
+const playBot = () => {
+  if (store.botMode === true) {
+    $('#message').text('You can play with bot now !! Please Create a new game !!')
+  } else {
+    $('#message').text('Bot mode is off now !! Please Create a new game !!')
+  }
+}
 module.exports = {
   drawMove,
   alertInvalid,
@@ -75,5 +94,7 @@ module.exports = {
   getGameSuccessful,
   alertGameOver,
   updateSuccess,
-  getAllGameSuccessful
+  getAllGameSuccessful,
+  highlight,
+  playBot
 }
