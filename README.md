@@ -1,10 +1,8 @@
-#Tic-tac-toe game:
+# Tic-tac-toe game:
 
-## Technology Used:
-    - HTML
-    - SCSS,
-    -JAVASCCRIPT, -
-    JQUERYAJAX
+## Technology Used
+- HTML, AJAX, CSS, JQUERY and JAVASCIRPT
+
 ### Game UI Round 1
 
 1.   Design a simple game board
@@ -62,3 +60,7 @@
   
 ## Wireframe 
   
+
+## Future features:
+1. Multiplayer
+2. Automatically signin
