@@ -39,53 +39,67 @@
     </div>
     <div id="message" class="alert alert-primary"></div>
     <div id="alert" class="alert alert-danger"></div>
+    <div id="game-id"  class="alert alert-info hide"></div>
+    <div id="display-game" class = "alert alert-info"></div>
        <!-- end gameBoard -->
 
     </div>
     <div id='main'>
       <div class="form-group">
+        <!-- sign up -->
           <form id="sign-up">
             <input class="form-control" name="credentials[email]" type="text" placeholder="email" >
             <input class="form-control" name="credentials[password]" type="password" placeholder="password">
             <input class="form-control" name="credentials[password_confirmation]" type="password" placeholder="password">
-            <button class="btn btn-outline-primary" type='submit'> Sign Up </button>
+            <button class="btn btn-outline-secondary" type='submit'> Sign Up </button>
           </form>
-        </div>
+
+        <!-- sign in -->
         <div class="form-group">
           <form id="sign-in">
             <input class="form-control" name="credentials[email]" type="text" placeholder="email">
             <input class="form-control" name="credentials[password]" type="password" placeholder="password">
-            <button class="btn btn-outline-primary" type='submit'> Sign IN </button>
+            <button class="btn btn-outline-secondary" type='submit'> Sign IN </button>
           </form>
         </div>
+
+        <!-- change password -->
         <div class="form-group">
           <form id="change-password" class="hide">
             <input class="form-control" type="password" name="passwords[old]" placeholder="Old Password">
             <input class="form-control" type="password" name="passwords[new]" placeholder="New Password">
-            <button class="btn btn-primary" type='submit'> Change </button>
+            <button class="btn btn-outline-secondary" type='submit'> Change </button>
           </form>
       </div>
-        <div class="form-group">
-          <form id="get-game" class="hide">
-            <input class="form-control" type="number" name="games[id]" placeholder="ID" min="0">
-            <button class="btn btn-outline-primary" >Get Game</button>
-          </form>
-        </div>
+
+      <!-- get game -->
+      <div class="form-group">
+        <form id="get-game" class="hide">
+          <input class="form-control" type="number" name="games[id]" placeholder="ID" min="0">
+          <button class="btn btn-outline-secondary" >Get Game</button>
+        </form>
+      </div>
+      <div id='inside'>
+
+        <!-- signout -->
         <div class="form-group">
           <form id="sign-out" class="hide">
-            <button class="btn btn-outline-primary">Sign-Out</button>
+            <button class="btn btn-outline-secondary">Sign-Out</button>
           </form>
         </div>
+
+        <!-- create game -->
         <div class="form-group">
           <form id="create-game" class="hide">
-            <button class="btn btn-outline-primary">CreateNewGame</button>
+            <button class="btn btn-outline-secondary">CreateNewGame</button>
           </form>
         </div>
+
         <form id="user-game" class="hide">
-          <button class="btn btn-outline-primary">Get total number</button>
+          <button class="btn btn-outline-secondary">Get total number</button>
         </form>
-          <div id="game-id" class="hide"></div>
-          <div id="display-game"></div>
+      </div>
         </div>
+      </div>
     </body>
 </html>

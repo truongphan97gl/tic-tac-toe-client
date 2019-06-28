@@ -5,6 +5,7 @@ const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api')
 store.play = ['', '', '', '', '', '', '', '', '']
 
+// function check win
 const isWin = (first, second, third) => {
   const firstCheck = $('#box' + first).text()
   const secondCheck = $('#box' + second).text()
@@ -17,13 +18,12 @@ const isWin = (first, second, third) => {
   return false
 }
 
-// check winner
+// check the possibility wins
 const winner = () => {
-  // Check in column
-
   const condition = isWin(1, 4, 7) || isWin(0, 3, 6) || isWin(2, 5, 8) ||
   isWin(0, 1, 2) || isWin(3, 4, 5) || isWin(6, 7, 8) || isWin(0, 4, 8) || isWin(2, 4, 6)
 
+  // if true then dont let user click
   if (condition) {
     $('#message').text(store.previousPlayer + ' is the winner ')
     store.disableClick = true
@@ -40,7 +40,7 @@ const onMove = event => {
   }
   const target = $(event.target)
   const id = target.data('id')
-  // Logic to check the move is avaiable or not
+  // if the game is end or full dont let the user click
   if (!store.disableClick) {
     if (target.text() === 'X' || target.text() === 'O') {
       ui.alertInvalid()
@@ -53,8 +53,8 @@ const onMove = event => {
         ui.drawMove(target, 'X', 'O')
         store['previousPlayer'] = 'X'
         store['currentPlayer'] = 'O'
-        // if the current player is O
       }
+      // store the space of the game board
       store.play[id] = store['previousPlayer']
     } // end else statement
   } // -- End of if statement
@@ -68,20 +68,22 @@ const onMove = event => {
   if (!winner() && !full) {
     $('#message').text('Draw')
   }
-  // everymove will update the game to the API
+  // check if the game is over or not
   let over = false
   if (store.Over === true) {
     over = 4
   }
 
+  // update the move
   api.updateGame(id, store.previousPlayer, over)
     .then(ui.updateSuccess)
 }
 
 const onCreateGame = event => {
   event.preventDefault()
-
+  // reset the storage
   store.play = ['', '', '', '', '', '', '', '', '']
+  // enable the gameBoard
   store.disableClick = false
   store.Over = false
   api.createGame()
@@ -91,10 +93,8 @@ const onCreateGame = event => {
 
 const onGetGame = event => {
   event.preventDefault()
-  console.log('check')
   const formData = getFormFields(event.target)
   const id = formData.games.id
-  console.log('id is', id)
   api.getGame(id)
     .then(ui.getGameSuccessful)
     .catch(ui.getGameFailure)
@@ -105,42 +105,6 @@ const onUserGame = event => {
   api.getAllGame()
     .then(ui.getAllGameSuccessful)
 }
-// -------------User PART--------------------
-// const onSignUp = event => {
-//   event.preventDefault()
-//   const formData = getFormFields(event.target)
-//
-//   api.signUp(formData)
-//     .then(ui.signUpSuccessful)
-//     .catch(ui.signUpFailure)
-// }
-//
-// const onSignIn = event => {
-//   event.preventDefault()
-//   const formData = getFormFields(event.target)
-//
-//   api.signIn(formData)
-//     .then(ui.signInSuccessful)
-//     .catch(ui.signInFailure)
-// }
-//
-// const onSignOut = event => {
-//   event.preventDefault()
-//
-//   api.signOut()
-//     .then(ui.signOutSuccessful)
-//     .catch(ui.signOutFailure)
-// }
-//
-// const onChangePassword = event => {
-//   event.preventDefault()
-//   const formData = getFormFields(event.target)
-//   api.changePassword(formData)
-//     .then(ui.changeSuccessful)
-//     .catch(ui.changeFailure)
-// }
-// -----------sketch goals----------
-
 module.exports = {
   onMove,
   onUserGame,

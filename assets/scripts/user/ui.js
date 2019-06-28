@@ -20,6 +20,7 @@ const signInSuccessful = responseData => {
   $('#message').text('You are signed in successfully')
   store.user = responseData.user
 
+  // show some things
   $('#user-game').removeClass('hide')
   $('#change-password').removeClass('hide')
   $('#create-game').removeClass('hide')
@@ -39,7 +40,7 @@ const signInFailure = response => {
 
 const signOutSuccessful = () => {
   $('#message').text('You signed out successfully ')
-  // hide
+  // hide some things
   $('#game-board').addClass('hide')
   $('#display-game').addClass('hide')
   $('#change-password').addClass('hide')
@@ -49,7 +50,7 @@ const signOutSuccessful = () => {
   $('#game-id').addClass('hide')
   $('#sign-out').addClass('hide')
   $('#user-game').addClass('hide')
-  // show
+  // show some things
   $('#sign-in').removeClass('hide')
   $('#sign-up').removeClass('hide')
   emptyBoard()

@@ -15,20 +15,33 @@ input {
   border-left: 2px solid;
   border-right: 2px solid;
   border-top: 2px solid;
-  color: $red;
+  color: $lightgrey;
   display: flex;
   font-size: 14vw;
-  height: 25vh;
+  height: 20vh;
   justify-content: center;
-  width: 25vh;
+  width: 15vh;
 
   &:hover {
     background-color: $yellow;
   }
 }
+#message, #alert, #game-id, #display-game {
+  text-align: center;
+  font-size: 3vh;
+}
+#inside {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .hide {
   display: none;
+}
+
+#game-board {
+  margin: 15px auto;
 }
 
 
