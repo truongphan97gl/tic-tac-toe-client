@@ -1,6 +1,9 @@
 'use strict'
 
 const store = require('../store')
+const api = require('./api.js')
+const userEvents = require('./events.js')
+
 const emptyBoard = () => {
   $('.box').text('')
   $('#message').text('')
@@ -9,6 +12,8 @@ const emptyBoard = () => {
 const signUpSuccessful = responseData => {
   $('#message').text('You are signed up successfully')
   $('form').trigger('reset')
+  api.signIn(store.signUp)
+    .then(signInSuccessful)
 }
 
 const signUpFailure = () => {
@@ -19,7 +24,6 @@ const signUpFailure = () => {
 const signInSuccessful = responseData => {
   $('#message').text('You are signed in successfully')
   store.user = responseData.user
-
   // show some things
   $('#user-game').removeClass('hide')
   $('#change-password').removeClass('hide')

@@ -2,10 +2,12 @@
 const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api.js')
 const ui = require('./ui.js')
+const store = require('../store')
+
 const onSignUp = event => {
   event.preventDefault()
   const formData = getFormFields(event.target)
-
+  store.signUp = formData
   api.signUp(formData)
     .then(ui.signUpSuccessful)
     .catch(ui.signUpFailure)

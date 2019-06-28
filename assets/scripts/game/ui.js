@@ -33,7 +33,6 @@ const emptyBoard = () => {
 }
 
 const createSuccessful = responseData => {
-  console.log(responseData)
   store.game = responseData.game
   $('.box').removeClass('red-background')
   $('#game-board').removeClass('hide')
@@ -53,7 +52,6 @@ const getGameFailure = responseData => {
 }
 const getGameSuccessful = responseData => {
   $('#message').text('You show successfully ')
-  console.log(responseData)
   // information of the content
   const htmlContent = `
     <p>ID: ${responseData.game.id}
@@ -70,11 +68,9 @@ const getGameSuccessful = responseData => {
 }
 
 const updateSuccess = responseData => {
-  console.log(responseData)
 }
 
 const getAllGameSuccessful = data => {
-  console.log(data)
   $('#message').text('Your total game is ' + data.games.length)
 }
 const playBot = () => {

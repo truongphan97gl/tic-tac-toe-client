@@ -8,11 +8,7 @@ store.winner = []
 // function check win
 
 const isWin = (first, second, third) => {
-  const firstCheck = $('#box' + first).text()
-  const secondCheck = $('#box' + second).text()
-  const thirdCheck = $('#box' + third).text()
-  if ((firstCheck === 'X' && secondCheck === 'X' && thirdCheck === 'X') ||
-   (firstCheck === 'O' && secondCheck === 'O' && thirdCheck === 'O')) {
+  if (store.play[first] === store.play[second] && store.play[second] === store.play[third]) {
     store.winner = [first, second, third]
     ui.highlight()
     return true
@@ -53,7 +49,7 @@ const checkMove = (target, id) => {
     ui.alertGameOver()
   }
   if (!store.disableClick) {
-    if (target.text() === 'X' || target.text() === 'O') {
+    if (typeof store.play[id] !== 'number') {
       ui.alertInvalid()
     } else {
       if (store['currentPlayer'] === 'O') {
@@ -87,7 +83,7 @@ const onMove = event => {
   const id = target.data('id')
   checkMove(target, id)
   if (store.Over !== true && store.botMode === true && store.valid === 1) {
-    aiTurn()
+    botTurn()
   }
   // check if full
 }
@@ -149,7 +145,7 @@ const takeRandomSpot = available => {
   return randomNumber
 }
 
-const aiTurn = () => {
+const botTurn = () => {
   const index = takeRandomSpot(emptySpot())
   const target = $('#box' + index)
   checkMove(target, index)
