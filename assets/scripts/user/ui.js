@@ -87,6 +87,8 @@ const signOutAuto = () => {
 }
 const changeSuccessful = responseData => {
   $('#message').text('You are changed password successfully')
+  api.signOut()
+    .then(signOutAuto)
   $('form').trigger('reset')
 }
 
