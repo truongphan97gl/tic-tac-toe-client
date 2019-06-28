@@ -18,8 +18,6 @@ const signUpFailure = () => {
 
 const signInSuccessful = responseData => {
   $('#message').text('You are signed in successfully')
-  $('#message').addClass('alert alert-primary')
-  $('#alert').addClass('alert alert-danger')
   store.user = responseData.user
 
   $('#user-game').removeClass('hide')
