@@ -5,6 +5,10 @@ $yellow: #ffff00;
 $lightblue: #add8e6;
 $lightgrey: lightgray;
 
+input {
+  width: 30px;
+}
+
 .box {
   align-items: center;
   border-bottom: 2px solid;
@@ -26,6 +30,7 @@ $lightgrey: lightgray;
 .hide {
   display: none;
 }
+
 
 @media only screen and (max-width: 600px) {
   body {

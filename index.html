@@ -12,11 +12,14 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>TIC-TAC-TOE</h1>
-      <div id="user-board" class="col-md-4"></div>
-      <div id="game-board" class="col-md-8">
-
-        <div id="gameBoard" class="hide" >
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">TIC-TAC-TOE</h1>
+        </div>
+      </div>
+      <div id="user-board" class="col-md-4">
+      </div>
+      <div id="game-board" class="col-md-8 hide">
           <div class="container">
            <div class="row">
              <div id="box0" data-id="0" class="col-sm-4 box"></div>
@@ -33,26 +36,26 @@
              <div id="box7" data-id="7" class="col-sm-4 box"></div>
              <div id="box8" data-id="8" class="col-sm-4 box"></div>
            </div>
-       </div>
       </div>
        <!-- end gameBoard -->
       <h3 id="message"></h3>
       <h3 id="alert"></h3>
 
     </div>
+    <div id='main'>
       <div class="form-group">
           <form id="sign-up">
             <input class="form-control" name="credentials[email]" type="text" placeholder="email" >
             <input class="form-control" name="credentials[password]" type="password" placeholder="password">
             <input class="form-control" name="credentials[password_confirmation]" type="password" placeholder="password">
-            <button class="btn btn-primary" type='submit'> Sign Up </button>
+            <button class="btn btn-outline-primary" type='submit'> Sign Up </button>
           </form>
         </div>
         <div class="form-group">
           <form id="sign-in">
             <input class="form-control" name="credentials[email]" type="text" placeholder="email">
             <input class="form-control" name="credentials[password]" type="password" placeholder="password">
-            <button class="btn btn-primary" type='submit'> Sign IN </button>
+            <button class="btn btn-outline-primary" type='submit'> Sign IN </button>
           </form>
         </div>
         <div class="form-group">
@@ -65,23 +68,24 @@
         <div class="form-group">
           <form id="get-game" class="hide">
             <input class="form-control" type="number" name="games[id]" placeholder="ID" min="0">
-            <button class="btn btn-primary" >Get Game</button>
+            <button class="btn btn-outline-primary" >Get Game</button>
           </form>
         </div>
         <div class="form-group">
           <form id="sign-out" class="hide">
-            <button class="btn btn-primary">Sign-Out</button>
+            <button class="btn btn-outline-primary">Sign-Out</button>
           </form>
         </div>
         <div class="form-group">
           <form id="create-game" class="hide">
-            <button class="btn btn-primary">CreateNewGame</button>
+            <button class="btn btn-outline-primary">CreateNewGame</button>
           </form>
         </div>
         <form id="user-game" class="hide">
-          <button class="btn btn-primary">Get total number</button>
+          <button class="btn btn-outline-primary">Get total number</button>
         </form>
           <div id="game-id" class="hide"></div>
           <div id="display-game"></div>
+        </div>
     </body>
 </html>

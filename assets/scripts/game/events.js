@@ -91,6 +91,7 @@ const onCreateGame = event => {
 
 const onGetGame = event => {
   event.preventDefault()
+  console.log('check')
   const formData = getFormFields(event.target)
   const id = formData.games.id
   console.log('id is', id)
@@ -105,48 +106,44 @@ const onUserGame = event => {
     .then(ui.getAllGameSuccessful)
 }
 // -------------User PART--------------------
-const onSignUp = event => {
-  event.preventDefault()
-  const formData = getFormFields(event.target)
-
-  api.signUp(formData)
-    .then(ui.signUpSuccessful)
-    .catch(ui.signUpFailure)
-}
-
-const onSignIn = event => {
-  event.preventDefault()
-  const formData = getFormFields(event.target)
-
-  api.signIn(formData)
-    .then(ui.signInSuccessful)
-    .catch(ui.signInFailure)
-}
-
-const onSignOut = event => {
-  event.preventDefault()
-
-  api.signOut()
-    .then(ui.signOutSuccessful)
-    .catch(ui.signOutFailure)
-}
-
-const onChangePassword = event => {
-  event.preventDefault()
-  const formData = getFormFields(event.target)
-  api.changePassword(formData)
-    .then(ui.changeSuccessful)
-    .catch(ui.changeFailure)
-}
+// const onSignUp = event => {
+//   event.preventDefault()
+//   const formData = getFormFields(event.target)
+//
+//   api.signUp(formData)
+//     .then(ui.signUpSuccessful)
+//     .catch(ui.signUpFailure)
+// }
+//
+// const onSignIn = event => {
+//   event.preventDefault()
+//   const formData = getFormFields(event.target)
+//
+//   api.signIn(formData)
+//     .then(ui.signInSuccessful)
+//     .catch(ui.signInFailure)
+// }
+//
+// const onSignOut = event => {
+//   event.preventDefault()
+//
+//   api.signOut()
+//     .then(ui.signOutSuccessful)
+//     .catch(ui.signOutFailure)
+// }
+//
+// const onChangePassword = event => {
+//   event.preventDefault()
+//   const formData = getFormFields(event.target)
+//   api.changePassword(formData)
+//     .then(ui.changeSuccessful)
+//     .catch(ui.changeFailure)
+// }
 // -----------sketch goals----------
 
 module.exports = {
   onMove,
-  onCreateGame,
-  onChangePassword,
+  onUserGame,
   onGetGame,
-  onSignUp,
-  onSignIn,
-  onSignOut,
-  onUserGame
+  onCreateGame
 }
