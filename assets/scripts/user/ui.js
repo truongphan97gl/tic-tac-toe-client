@@ -72,6 +72,9 @@ const changeFailure = response => {
   $('form').trigger('reset')
 }
 
+const playBot = () => {
+  $('#message').text('You can play with bot ')
+}
 module.exports = {
   signUpFailure,
   signUpSuccessful,
@@ -80,5 +83,6 @@ module.exports = {
   signOutSuccessful,
   signOutFailure,
   changeSuccessful,
-  changeFailure
+  changeFailure,
+  playBot
 }

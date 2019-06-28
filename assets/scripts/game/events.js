@@ -7,17 +7,6 @@ store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 store.winner = []
 // function check win
 
-const onPlaybot = event => {
-  event.preventDefault()
-  store.disableClick = true
-  if (store.botMode === true) {
-    store.botMode = false
-  } else {
-    store.botMode = true
-  }
-  ui.playBot()
-}
-
 const isWin = (first, second, third) => {
   const firstCheck = $('#box' + first).text()
   const secondCheck = $('#box' + second).text()
@@ -40,6 +29,7 @@ const isFull = () => {
   if (!winner() && full) {
     $('#message').text('Draw')
     store.Over = true
+    $('.box').addClass('red-background')
   }
 }
 // check the possibility wins
@@ -59,10 +49,12 @@ const winner = () => {
 }
 
 const checkMove = (target, id) => {
+  if (store.disableClick === true) {
+    ui.alertGameOver()
+  }
   if (!store.disableClick) {
     if (target.text() === 'X' || target.text() === 'O') {
       ui.alertInvalid()
-      checkMove(target, id)
     } else {
       if (store['currentPlayer'] === 'O') {
         ui.drawMove(target, 'O', 'X')
@@ -74,6 +66,7 @@ const checkMove = (target, id) => {
         store['currentPlayer'] = 'O'
       }
       // store the space of the game board
+      store.valid = 1
       store.play[id] = store['previousPlayer']
     } // end else statement
   } // -- End of if statement
@@ -90,13 +83,10 @@ const checkMove = (target, id) => {
 }
 
 const onMove = event => {
-  if (store.disableClick === true) {
-    ui.alertGameOver()
-  }
   const target = $(event.target)
   const id = target.data('id')
   checkMove(target, id)
-  if (store.Over !== true && store.botMode === true) {
+  if (store.Over !== true && store.botMode === true && store.valid === 1) {
     aiTurn()
   }
   // check if full
@@ -130,6 +120,17 @@ const onUserGame = event => {
 }
 // AI player
 
+const onPlaybot = event => {
+  event.preventDefault()
+  store.disableClick = true
+  if (store.botMode === true) {
+    store.botMode = false
+  } else {
+    store.botMode = true
+  }
+  ui.playBot()
+}
+
 const emptySpot = () => {
   const available = []
   for (let i = 0; i < store.play.length; i++) {
@@ -153,6 +154,7 @@ const aiTurn = () => {
   const target = $('#box' + index)
   checkMove(target, index)
 }
+
 module.exports = {
   onMove,
   onUserGame,

@@ -2,17 +2,14 @@
 const store = require('../store')
 
 const alertInvalid = () => {
-  if (store.botMode === true) {
-    $('#alert').text('Please create a new game !!')
-  } else {
-    $('#alert').text('You cannot click at that cell !!!!')
-  }
+  $('#alert').text('You cannot click at that cell !!!!')
   $('#alert').css('color', 'red')
+  store.valid = 0
 }
 
 const drawMove = (target, xOro, currentPlayer) => {
   target.text(xOro)
-  $('#message').text(currentPlayer + ' is TURN!')
+  $('#message').text(currentPlayer + ' is TURN !!')
   $('#alert').text('')
 }
 
@@ -31,14 +28,16 @@ const emptyBoard = () => {
   $('#message').text('')
   $('#alert').text('')
   for (let i = 0; i < 3; i++) {
-    $('#box' + store.winner[i]).removeClass('red-background')
+    $('#message' + store.winner[i]).removeClass('red-background')
   }
 }
 
 const createSuccessful = responseData => {
   console.log(responseData)
   store.game = responseData.game
+  $('.box').removeClass('red-background')
   $('#game-board').removeClass('hide')
+  $('#message').text('')
   $('#game-id').text('Your game ID is :' + responseData.game.id)
   emptyBoard()
   $('#message').text('You are created successfully')
