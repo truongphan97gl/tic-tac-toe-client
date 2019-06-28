@@ -26,6 +26,7 @@ const alertGameOver = () => {
 const emptyBoard = () => {
   $('.box').text('')
   $('#message').text('')
+  $('#display-game').text('')
   $('#alert').text('')
   for (let i = 0; i < 3; i++) {
     $('#message' + store.winner[i]).removeClass('red-background')
@@ -54,8 +55,8 @@ const getGameSuccessful = responseData => {
   $('#message').text('You show successfully ')
   // information of the content
   const htmlContent = `
-    <p>ID: ${responseData.game.id}
-    <p>Cells: ${responseData.game.cells}
+    <p>ID: ${responseData.game.id}</p>
+    <p>Cells: ${responseData.game.cells}</p>
     <p>Over :${responseData.game.over}</p>
     <p>Player X: {
       id: ${responseData.game.player_x.id}
@@ -72,6 +73,7 @@ const updateSuccess = responseData => {
 
 const getAllGameSuccessful = data => {
   $('#message').text('Your total game is ' + data.games.length)
+  console.log(data)
 }
 const playBot = () => {
   if (store.botMode === true) {
@@ -79,6 +81,24 @@ const playBot = () => {
   } else {
     $('#message').text('Bot mode is off now !! Please Create a new game !!')
   }
+}
+// ----------- showAllGame-----------
+const showAllGame = responseData => {
+  $('#myModal').addClass('block')
+  responseData.games.forEach(Data => {
+    const htmlContent = `
+
+      <p class='info'>ID: ${Data.id}
+      | Cells: ${Data.cells}
+      | Over :${Data.over}
+      | Player X: {
+        id: ${Data.player_x.id}
+        email: ${Data.player_x.email}
+      }
+      |Player O : ${Data.player_o}</p>
+    `
+    $('.modal-content').append(htmlContent)
+  })
 }
 module.exports = {
   drawMove,
@@ -91,5 +111,6 @@ module.exports = {
   updateSuccess,
   getAllGameSuccessful,
   highlight,
-  playBot
+  playBot,
+  showAllGame
 }

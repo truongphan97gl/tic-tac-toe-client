@@ -18,4 +18,6 @@ $(() => {
   $('#sign-in').on('submit', userEvents.onSignIn)
   $('#sign-out').on('submit', userEvents.onSignOut)
   $('#play-bot').on('submit', gameEvents.onPlaybot)
+  $('#show-past-game').on('submit', gameEvents.onShowPastGame)
+  $('.close').on('click', gameEvents.onClose)
 })

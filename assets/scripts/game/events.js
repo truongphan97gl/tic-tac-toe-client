@@ -151,10 +151,26 @@ const botTurn = () => {
   checkMove(target, index)
 }
 
+// ------------------------------------
+
+const onShowPastGame = event => {
+  event.preventDefault()
+
+  api.getAllGame()
+    .then(ui.showAllGame)
+}
+
+const onClose = event => {
+  event.preventDefault()
+  $('#myModal').addClass('hide')
+}
+
 module.exports = {
   onMove,
   onUserGame,
   onGetGame,
   onCreateGame,
-  onPlaybot
+  onPlaybot,
+  onShowPastGame,
+  onClose
 }
