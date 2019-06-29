@@ -1,6 +1,6 @@
 'use strict'
 const store = require('../store')
-
+store.id = []
 const alertInvalid = () => {
   $('#alert').text('You cannot click at that cell !!!!')
   $('#alert').css('color', 'red')
@@ -84,20 +84,21 @@ const playBot = () => {
 }
 // ----------- showAllGame-----------
 const showAllGame = responseData => {
-  $('#myModal').addClass('block')
   responseData.games.forEach(Data => {
-    const htmlContent = `
-
+    if (store.id.indexOf(Data.id) === -1) {
+      store.id.push(Data.id)
+      const htmlContent = `
       <p class='info'>ID: ${Data.id}
-      | Cells: ${Data.cells}
-      | Over :${Data.over}
-      | Player X: {
-        id: ${Data.player_x.id}
-        email: ${Data.player_x.email}
-      }
-      |Player O : ${Data.player_o}</p>
-    `
-    $('.modal-content').append(htmlContent)
+        | Cells: ${Data.cells}
+        | Over :${Data.over}
+        | Player X: {
+          id: ${Data.player_x.id}
+          email: ${Data.player_x.email}
+        }
+        |Player O : ${Data.player_o}</p>
+        `
+      $('.modal-content').append(htmlContent)
+    }
   })
 }
 module.exports = {

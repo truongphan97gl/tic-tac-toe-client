@@ -13,6 +13,9 @@ input {
   background-color: $red;
 }
 
+.block {
+  display: block;
+}
 .box {
   align-items: center;
   border-bottom: 2px solid;
@@ -31,9 +34,6 @@ input {
   }
 }
 
-.block {
-  display: block;
-}
 #message, #alert, #game-id, #display-game {
   font-size: 3vh;
   text-align: center;

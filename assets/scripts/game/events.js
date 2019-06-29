@@ -155,14 +155,14 @@ const botTurn = () => {
 
 const onShowPastGame = event => {
   event.preventDefault()
-
+  $('#myModal').addClass('block')
   api.getAllGame()
     .then(ui.showAllGame)
 }
 
 const onClose = event => {
   event.preventDefault()
-  $('#myModal').addClass('hide')
+  $('#myModal').removeClass('block')
 }
 
 module.exports = {
