@@ -84,11 +84,12 @@ const playBot = () => {
 }
 // ----------- showAllGame-----------
 const showAllGame = responseData => {
+  store.allGame = responseData.games
   responseData.games.forEach(Data => {
     if (store.id.indexOf(Data.id) === -1) {
       store.id.push(Data.id)
       const htmlContent = `
-      <p class='info'>ID: ${Data.id}
+      <p class="info" data-id="${Data.id}">ID: ${Data.id}
         | Cells: ${Data.cells}
         | Over :${Data.over}
         | Player X: {
@@ -101,6 +102,27 @@ const showAllGame = responseData => {
     }
   })
 }
+
+const showGame = responseData => {
+  store.disableClick = true
+  store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  responseData.games.forEach(Data => {
+    if (Data.id === store.idResume) {
+      for (let i = 0; i < 9; i++) {
+        $('#box' + i).text(Data.cells[i])
+        store.play[i] = Data.cells[i]
+        if (Data.cells[i] === '') {
+          store.play[i] = i
+        }
+      }
+    }
+    $('#game-board').removeClass('hide')
+    $('#myModal').removeClass('block')
+    $('#message').text('show successfully')
+    $('.box').removeClass('red-background')
+  })
+}
+
 module.exports = {
   drawMove,
   alertInvalid,
@@ -113,5 +135,6 @@ module.exports = {
   getAllGameSuccessful,
   highlight,
   playBot,
-  showAllGame
+  showAllGame,
+  showGame
 }

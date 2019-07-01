@@ -20,4 +20,6 @@ $(() => {
   $('#play-bot').on('submit', gameEvents.onPlaybot)
   $('#show-past-game').on('submit', gameEvents.onShowPastGame)
   $('.close').on('click', gameEvents.onClose)
+  $('#resume-play').on('submit', gameEvents.onResume)
+  $('.modal-content').on('click', '.info', gameEvents.onInfo)
 })

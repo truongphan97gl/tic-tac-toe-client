@@ -5,6 +5,8 @@ const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api')
 store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 store.winner = []
+store['currentPlayer'] = 'X'
+
 // function check win
 
 const isWin = (first, second, third) => {
@@ -61,8 +63,9 @@ const checkMove = (target, id) => {
         store['previousPlayer'] = 'X'
         store['currentPlayer'] = 'O'
       }
-      // store the space of the game board
+      // make a thing to make sure that the next move is valid move
       store.valid = 1
+      // store the space of the game board
       store.play[id] = store['previousPlayer']
     } // end else statement
   } // -- End of if statement
@@ -93,6 +96,7 @@ const onCreateGame = event => {
   // reset the storage
   store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   // enable the gameBoard
+  store['currentPlayer'] = 'X'
   store.disableClick = false
   store.Over = false
   api.createGame()
@@ -114,7 +118,7 @@ const onUserGame = event => {
   api.getAllGame()
     .then(ui.getAllGameSuccessful)
 }
-// AI player
+// bot player
 
 const onPlaybot = event => {
   event.preventDefault()
@@ -150,7 +154,7 @@ const botTurn = () => {
   const target = $('#box' + index)
   checkMove(target, index)
 }
-
+// ------ HARDMODE BOT -----
 // ------------------------------------
 
 const onShowPastGame = event => {
@@ -164,7 +168,15 @@ const onClose = event => {
   event.preventDefault()
   $('#myModal').removeClass('block')
 }
-
+// ---------Resume Past Play ------
+const onInfo = event => {
+  const target = $(event.target)
+  const id = target.data('id')
+  store.idResume = id
+  console.log(store.idResume)
+  api.getAllGame()
+    .then(ui.showGame)
+}
 module.exports = {
   onMove,
   onUserGame,
@@ -172,5 +184,6 @@ module.exports = {
   onCreateGame,
   onPlaybot,
   onShowPastGame,
-  onClose
+  onClose,
+  onInfo
 }

@@ -23,11 +23,11 @@ input {
   border-right: 2px solid;
   border-top: 2px solid;
   color: $lightgrey;
-  display: flex;
-  font-size: 14vw;
   height: 20vh;
+  display: flex;
+  font-size: 13vw;
   justify-content: center;
-  width: 15vh;
+  width: cal(100%/3)
 
   &:hover {
     background-color: $yellow;
@@ -78,9 +78,10 @@ input {
 
 .info {
   &:hover {
-    background-color: gray;
+    background-color: red;
   }
 }
+
 /* The Close Button */
 .close {
   color: #aaaaaa;
