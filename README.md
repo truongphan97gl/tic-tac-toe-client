@@ -59,8 +59,7 @@
   - Seeing my statistics.
   
 ## Wireframe 
-  
-
+https://imgur.com/3qe3Z5b
 ## Future features:
-1. Multiplayer
-2. Automatically signin
+1. Multiplayer.
+2. Hard Mode Bot.
