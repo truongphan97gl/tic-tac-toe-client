@@ -113,10 +113,10 @@ const onGetGame = event => {
     .catch(ui.getGameFailure)
 }
 
-const onUserGame = event => {
+const onTotalGame = event => {
   event.preventDefault()
   api.getAllGame()
-    .then(ui.getAllGameSuccessful)
+    .then(ui.totalGameSuccessful)
 }
 // bot player
 
@@ -168,7 +168,7 @@ const onClose = event => {
   event.preventDefault()
   $('#myModal').removeClass('block')
 }
-// ---------Resume Past Play ------
+// ---------On show past game ------
 const onInfo = event => {
   const target = $(event.target)
   const id = target.data('id')
@@ -179,7 +179,7 @@ const onInfo = event => {
 }
 module.exports = {
   onMove,
-  onUserGame,
+  onTotalGame,
   onGetGame,
   onCreateGame,
   onPlaybot,

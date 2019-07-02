@@ -71,9 +71,16 @@ const getGameSuccessful = responseData => {
 const updateSuccess = responseData => {
 }
 
-const getAllGameSuccessful = data => {
-  $('#message').text('Your total game is ' + data.games.length)
-  console.log(data)
+const totalGameSuccessful = responseData => {
+  $('#message').text('Your total game is ' + responseData.games.length)
+  let count = 0
+  store.allGame = responseData.games
+  responseData.games.forEach(Data => {
+    if (Data.Over === true) {
+      count++
+    }
+  })
+  $('#message').text(`Your total game is ${responseData.games.length} and won ${count}`)
 }
 const playBot = () => {
   if (store.botMode === true) {
@@ -132,7 +139,7 @@ module.exports = {
   getGameSuccessful,
   alertGameOver,
   updateSuccess,
-  getAllGameSuccessful,
+  totalGameSuccessful,
   highlight,
   playBot,
   showAllGame,
