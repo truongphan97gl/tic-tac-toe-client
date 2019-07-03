@@ -1,7 +1,11 @@
 # Tic-tac-toe game:
 
 ## Technology Used
-- HTML, AJAX, CSS, JQUERY and JAVASCIRPT
+- HTML
+- AJAX
+- CSS
+- JQUERY
+- JAVASCIRPT
 
 ### Game UI Round 1
 
@@ -50,15 +54,15 @@
   - Try that new Idea
   - Fail -> Search google again
   - Success -> move on
-  
+
  ## User Story :
- As a user I want: 
+ As a user I want:
   - Start a new game whenever I want.
   - Sign In Sign up, Sign out to keep track my record.
   - Knowing who's turn to play.
   - Seeing my statistics.
-  
-## Wireframe 
+
+## Wireframe
 https://imgur.com/3qe3Z5b
 ## Future features:
 1. Multiplayer.

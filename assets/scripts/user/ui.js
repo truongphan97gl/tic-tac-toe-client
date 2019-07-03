@@ -67,13 +67,13 @@ const signInSuccessful = responseData => {
 }
 
 const signInFailure = response => {
-  $('#message').text('You failed to signed up ')
+  $('#message').text('You failed to signed in ')
   $('form').trigger('reset')
 }
 
 const signOutSuccessful = () => {
   $('#message').text('You signed out successfully ')
-  // hide some things
+  // hide some thingsxw
   outsideUi()
   $('form').trigger('reset')
 }
