@@ -13,6 +13,8 @@ const insideUi = () => {
   $('#show-past-game').removeClass('hide')
   // Hide
   $('#sign-in').addClass('hide')
+  $('#guest-login').addClass('hide')
+
   $('#sign-up').addClass('hide')
   $('form').trigger('reset')
 }
@@ -29,6 +31,7 @@ const outsideUi = () => {
   $('#user-game').addClass('hide')
   $('#play-bot').addClass('hide')
   $('#show-past-game').addClass('hide')
+  $('#guest-login').removeClass('hide')
   // show some things
   $('#sign-in').removeClass('hide')
   $('#sign-up').removeClass('hide')
